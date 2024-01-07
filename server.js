@@ -2,14 +2,19 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const axios = require('axios');
+const morgan = require('morgan'); 
 const PORT = process.env.PORT || 8080;
 const API_KEY = process.env.API_KEY; // Replace with your Pixabay API key
 
 
+// middleware
 
 app.use(express.json());
+app.use(morgan('dev')); 
 app.use(express.static('public', { 'extensions': ['html', 'htm', 'css', 'js'] }));
 
+
+// routes
 
 app.get('/', (req, res) => { 
   res.sendFile('./public/index.html', {root: __dirname});
